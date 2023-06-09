@@ -1,0 +1,61 @@
+<div class="m-2 banner-bg">
+    <div class="row">
+        <h1 class="text-center mb-4">Angular - SpringBoot App</h1>
+        <section class="col-7">
+            <h2 class="text-center">List of courses</h2>
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Duration</th>
+                        <th scope="col">Fees</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr (click)="selectCourse(course)" class="clickable" *ngFor="let course of courses">
+                        <th scope="row">{{course.id}}</th>
+                        <td>{{course.title}}</td>
+                        <td>{{course.description}}</td>
+                        <td>{{course.duration}} Months</td>
+                        <td>$ {{course.fees}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="col-5">
+            <h2 class="text-center" *ngIf="!course.id">Add A New Course</h2>
+            <h2 class="text-center" *ngIf="course.id">Edit/Delete An Existing Course</h2>
+            <div class="style-3D p-2">
+                <fieldset class="p-2">
+                    <label class="col-4">Course Title: *</label>
+                    <input class="col-6" type="text" [(ngModel)]="course.title" placeholder="Enter Course Title"
+                        required />
+                </fieldset>
+                <fieldset class="p-2">
+                    <label class="col-4">Course Description: *</label>
+                    <textarea class="col-6" cols="30" rows="2" [(ngModel)]="course.description"
+                        placeholder="Enter Course Description" required></textarea>
+                </fieldset>
+                <fieldset class="p-2">
+                    <label class="col-4">Course Duration: *</label>
+                    <input class="col-6" type="number" [(ngModel)]="course.duration" min="1" max="12"
+                        placeholder="Enter Duration in Month" required>
+                </fieldset>
+                <fieldset class="p-2">
+                    <label class="col-4">Course Fees: *</label>
+                    <input class="col-6" type="number" min="50" [(ngModel)]="course.fees"
+                        placeholder="Enter Fees for the Course" required>
+                </fieldset>
+                <hr>
+                <div class="text-center">
+                    <button class="btn btn-primary" (click)="addCourse()" *ngIf="!course.id">Save</button>
+                    <button class="btn btn-success mx-2" (click)="updateCourse()" *ngIf="course.id">Update</button>
+                    <button class="btn btn-danger" (click)="deleteCourse(course.id)" *ngIf="course.id">Delete</button>
+                    <button class="btn btn-secondary mx-2" (click)="clearForm()">Reset</button>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
